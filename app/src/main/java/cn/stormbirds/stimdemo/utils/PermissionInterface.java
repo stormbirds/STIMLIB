@@ -1,4 +1,4 @@
-package cn.stormbirds.stimdemo.utils;
+package cn.stormbirds.stidemo.utils;
 
 /**
   * <p>Copyright (c) 小宝 @ 2019</p>

@@ -10,17 +10,18 @@ import android.widget.TextView;
 
 import java.util.UUID;
 
-import cn.stormbirds.stimdemo.bean.GroupMessage;
-import cn.stormbirds.stimdemo.bean.SingleMessage;
-import cn.stormbirds.stimdemo.event.Events;
-import cn.stormbirds.stimdemo.event.IMEventCenter;
-import cn.stormbirds.stimdemo.event.IM_EventListener;
-import cn.stormbirds.stimdemo.im.IMSClientBootstrap;
-import cn.stormbirds.stimdemo.im.MessageProcessor;
-import cn.stormbirds.stimdemo.im.MessageType;
-import cn.stormbirds.stimdemo.utils.CThreadPoolExecutor;
+import cn.stormbirds.stimdemo.R;
+import cn.stormbirds.stimlib.bean.GroupMessage;
+import cn.stormbirds.stimlib.bean.SingleMessage;
+import cn.stormbirds.stimlib.event.Events;
+import cn.stormbirds.stimlib.event.IMEventCenter;
+import cn.stormbirds.stimlib.event.IM_EventListener;
+import cn.stormbirds.stimlib.im.IMSClientBootstrap;
+import cn.stormbirds.stimlib.im.MessageProcessor;
+import cn.stormbirds.stimlib.im.MessageType;
+import cn.stormbirds.stimlib.utils.CThreadPoolExecutor;
 import cn.stormbirds.stimdemo.utils.PermissionHelper;
-import cn.stormbirds.stimdemo.utils.PermissionInterface;
+import cn.stormbirds.stidemo.utils.PermissionInterface;
 
 
 public class MainActivity extends AppCompatActivity implements IM_EventListener, PermissionInterface {

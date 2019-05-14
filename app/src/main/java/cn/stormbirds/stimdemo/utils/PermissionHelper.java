@@ -17,9 +17,9 @@ import android.support.annotation.NonNull;
 public class PermissionHelper {
 
 	private Activity mActivity;
-	private PermissionInterface mPermissionInterface;
+	private cn.stormbirds.stidemo.utils.PermissionInterface mPermissionInterface;
 
-	public PermissionHelper(@NonNull Activity activity, @NonNull PermissionInterface permissionInterface) {
+	public PermissionHelper(@NonNull Activity activity, @NonNull cn.stormbirds.stidemo.utils.PermissionInterface permissionInterface) {
 		mActivity = activity;
 		mPermissionInterface = permissionInterface;
 	}
@@ -30,9 +30,9 @@ public class PermissionHelper {
 	 * 如果设备还不是M或以上版本，则也会回调到requestPermissionsSuccess方法。
 	 */
 	public void requestPermissions(){
-		String[] deniedPermissions = PermissionUtil.getDeniedPermissions(mActivity, mPermissionInterface.getPermissions());
+		String[] deniedPermissions = cn.stormbirds.stidemo.utils.PermissionUtil.getDeniedPermissions(mActivity, mPermissionInterface.getPermissions());
 		if(deniedPermissions != null && deniedPermissions.length > 0){
-			PermissionUtil.requestPermissions(mActivity, deniedPermissions, mPermissionInterface.getPermissionsRequestCode());
+			cn.stormbirds.stidemo.utils.PermissionUtil.requestPermissions(mActivity, deniedPermissions, mPermissionInterface.getPermissionsRequestCode());
 		}else{
 			mPermissionInterface.requestPermissionsSuccess();
 		}

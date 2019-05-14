@@ -1,4 +1,4 @@
-package cn.stormbirds.stimdemo.utils;
+package cn.stormbirds.stidemo.utils;
 
 import android.app.Activity;
 import android.content.Context;
