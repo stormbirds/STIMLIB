@@ -1,10 +1,10 @@
 # STIMLIB
 stormbirds im demo for android by netty with spring boot
 
-# How to use
-## Step 1
-## Gradle
-###  1. Add the JitPack repository to your build file
+## How to use
+### Step 1
+    Gradle
+1. Add the JitPack repository to your build file
 Add it in your root build.gradle at the end of repositories:
 ```
 allprojects {
@@ -14,14 +14,14 @@ allprojects {
 		}
 	}
 ```
-###  2. Add the dependency
+2. Add the dependency
 ```
 dependencies {
 	        implementation 'com.github.stormbirds:stimlib:v0.0.1'
 }
 ```
-## Maven
-###  1. Add the JitPack repository to your build file
+     Maven
+1. Add the JitPack repository to your build file
 ```
 	<repositories>
 		<repository>
@@ -30,7 +30,7 @@ dependencies {
 		</repository>
 	</repositories>
 ```
-###  2. Add the dependency
+2. Add the dependency
 ```
 	<dependency>
 	    <groupId>com.github.stormbirds</groupId>
@@ -38,7 +38,7 @@ dependencies {
 	    <version>Tag</version>
 	</dependency>
 ```
-## Step 2
+### Step 2
 Add BaseApplication file
 ```
 package cn.stormbirds.stimdemo.base;
