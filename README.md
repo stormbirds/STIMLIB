@@ -61,4 +61,4 @@ public class BaseApplication extends STIMApp {
     </application>
 ```
 in MainActivity or any where you want use im implements IM_EventListener
-[example demo](https://github.com/stormbirds/stimlib/app/src/main/java/cn/stormbirds/stimdemo/MainActivity.java)
+[example demo](https://github.com/stormbirds/STIMLIB/blob/master/app/src/main/java/cn/stormbirds/stimdemo/MainActivity.java)
