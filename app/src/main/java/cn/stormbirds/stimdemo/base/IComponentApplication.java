@@ -1,4 +1,4 @@
-package cn.stormbirds.stimlib.base;
+package cn.stormbirds.stimdemo.base;
 
 import android.app.Application;
 
