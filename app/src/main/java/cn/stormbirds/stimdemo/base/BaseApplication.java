@@ -1,8 +1,9 @@
 package cn.stormbirds.stimdemo.base;
 
+import java.util.UUID;
+
 import cn.stormbirds.stimlib.STIMApp;
-import cn.stormbirds.stimdemo.base.hookapp.AppConfig;
-import cn.stormbirds.stimdemo.base.hookapp.HookApplication;
+import cn.stormbirds.stimlib.im.IMClientBootstrap;
 
 
 /**
@@ -26,5 +27,9 @@ public class BaseApplication extends STIMApp {
     @Override
     public void onCreate() {
         super.onCreate();
+        String userId = UUID.randomUUID().toString();
+        String token = "Bearer " + userId;
+        String hosts = "[{\"host\":\"192.168.6.198\", \"port\":8855}]";
+        IMClientBootstrap.getInstance().init(userId, token, hosts, 0);
     }
 }

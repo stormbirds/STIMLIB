@@ -13,7 +13,7 @@ import cn.stormbirds.stimlib.api.IMSConnectStatusCallback;
   * @ Description：    连接状态监听器
   *
   */
-public class IMSConnectStatusListener implements IMSConnectStatusCallback {
+public class IMConnectStatusListener implements IMSConnectStatusCallback {
 
     @Override
     public void onConnecting() {

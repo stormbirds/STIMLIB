@@ -1,6 +1,8 @@
 package cn.stormbirds.stimlib;
 
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
@@ -11,6 +13,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
 
+
+    private static final String TAG = LoginAuthRespHandler.class.getName();
     private NettyTcpClient imsClient;
 
     public LoginAuthRespHandler(NettyTcpClient imsClient) {
@@ -55,6 +59,7 @@ public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
                     // 添加心跳消息管理handler
                     imsClient.addHeartbeatHandler();
                 } else {
+                    Log.e(TAG, "channelRead: 握手失败，触发重连" );
                     imsClient.resetConnect(false);// 握手失败，触发重连
                 }
             }

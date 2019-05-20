@@ -22,12 +22,18 @@ import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
   * @ Description：    与ims交互的listener
   *
   */
-public class IMSEventListener implements OnEventListener {
+public class IMEventListener implements OnEventListener {
 
     private String userId;
     private String token;
 
-    public IMSEventListener(String userId, String token) {
+    public IMEventListener(String userId, String token) {
+        this.userId = userId;
+        this.token = token;
+    }
+
+    @Override
+    public void login(String userId, String token) {
         this.userId = userId;
         this.token = token;
     }

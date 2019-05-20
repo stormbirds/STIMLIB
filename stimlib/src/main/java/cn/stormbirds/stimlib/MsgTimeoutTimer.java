@@ -3,17 +3,17 @@ package cn.stormbirds.stimlib;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.stormbirds.stimlib.api.IMSClientInterface;
+import cn.stormbirds.stimlib.api.IMClientInterface;
 import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 
 public class MsgTimeoutTimer extends Timer {
 
-    private IMSClientInterface imsClient;// ims客户端
+    private IMClientInterface imsClient;// ims客户端
     private MessageProtobuf.Msg msg;// 发送的消息
     private int currentResendCount;// 当前重发次数
     private MsgTimeoutTask task;// 消息发送超时任务
 
-    public MsgTimeoutTimer(IMSClientInterface imsClient, MessageProtobuf.Msg msg) {
+    public MsgTimeoutTimer(IMClientInterface imsClient, MessageProtobuf.Msg msg) {
         this.imsClient = imsClient;
         this.msg = msg;
         task = new MsgTimeoutTask();
@@ -44,7 +44,7 @@ public class MsgTimeoutTimer extends Timer {
                     headBuilder.setMsgId(msg.getHead().getMsgId());
                     headBuilder.setMsgType(imsClient.getServerSentReportMsgType());
                     headBuilder.setTimestamp(System.currentTimeMillis());
-                    headBuilder.setStatusReport(IMSConfig.DEFAULT_REPORT_SERVER_SEND_MSG_FAILURE);
+                    headBuilder.setStatusReport(IMConfig.DEFAULT_REPORT_SERVER_SEND_MSG_FAILURE);
                     builder.setHead(headBuilder.build());
 
                     // 通知应用层消息发送失败

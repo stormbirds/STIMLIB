@@ -2,6 +2,8 @@ package cn.stormbirds.stimlib;
 
 import android.app.Application;
 
+import cn.stormbirds.stimlib.im.IMClientBootstrap;
+
 /**
   * <p>Copyright (c) 小宝 @ 2019</p>
   *

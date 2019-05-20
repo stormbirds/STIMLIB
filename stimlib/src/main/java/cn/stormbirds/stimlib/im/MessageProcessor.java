@@ -70,9 +70,9 @@ public class MessageProcessor implements IMessageProcessor {
 
             @Override
             public void run() {
-                boolean isActive = IMSClientBootstrap.getInstance().isActive();
+                boolean isActive = IMClientBootstrap.getInstance().isActive();
                 if (isActive) {
-                    IMSClientBootstrap.getInstance().sendMessage(MessageBuilder.getProtoBufMessageBuilderByAppMessage(message).build());
+                    IMClientBootstrap.getInstance().sendMessage(MessageBuilder.getProtoBufMessageBuilderByAppMessage(message).build());
                 } else {
                     Log.e(TAG, "发送消息失败");
                 }

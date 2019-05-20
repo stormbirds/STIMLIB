@@ -10,14 +10,14 @@ import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 /**
  *
  * @Package:        cn.stormbirds.imlib.api
- * @ClassName:      IMSClientInterface
+ * @ClassName:      IMClientInterface
  * @Description:    java类作用描述
  * @Author:         StormBirds
  * @Email           xbaojun@gmail.com
  * @CreateDate:     19-5-12 下午7:38
  * @Version:        1.0
  */
-public interface IMSClientInterface {
+public interface IMClientInterface {
 
     /**
      * 初始化
@@ -27,6 +27,8 @@ public interface IMSClientInterface {
      * @param callback      ims连接状态回调
      */
     void init(Vector<String> serverUrlList, OnEventListener listener, IMSConnectStatusCallback callback);
+
+    void login(String userId, String token);
 
     /**
      * 重置连接，也就是重连

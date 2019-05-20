@@ -16,16 +16,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-/**
-  * <p>Copyright (c) 小宝 @ 2019</p>
-  * 
-  * @ Package Name:    cn.stormbirds.stimlib.utils
-  * @ Author：         stormbirds
-  * @ Email：          xbaojun@gmail.com
-  * @ Created At：     2019/5/13 11:34
-  * @ Description：    
-  * 
-  */
+
 /**
  * <p>@ProjectName:     BoChat</p>
  * <p>@ClassName:       CThreadPoolExecutor.java</p>

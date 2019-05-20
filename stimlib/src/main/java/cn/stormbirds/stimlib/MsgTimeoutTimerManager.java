@@ -4,16 +4,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import cn.stormbirds.stimlib.api.IMSClientInterface;
+import cn.stormbirds.stimlib.api.IMClientInterface;
 import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 import io.netty.util.internal.StringUtil;
 
 public class MsgTimeoutTimerManager {
 
     private Map<String, MsgTimeoutTimer> mMsgTimeoutMap = new ConcurrentHashMap<>();
-    private IMSClientInterface imsClient;// ims客户端
+    private IMClientInterface imsClient;// ims客户端
 
-    public MsgTimeoutTimerManager(IMSClientInterface imsClient) {
+    public MsgTimeoutTimerManager(IMClientInterface imsClient) {
         this.imsClient = imsClient;
     }
 

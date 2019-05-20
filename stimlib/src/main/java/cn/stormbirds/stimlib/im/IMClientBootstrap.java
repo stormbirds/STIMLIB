@@ -1,13 +1,16 @@
 package cn.stormbirds.stimlib.im;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.UUID;
 import java.util.Vector;
 
-import cn.stormbirds.stimlib.IMSClientFactory;
-import cn.stormbirds.stimlib.api.IMSClientInterface;
+import cn.stormbirds.stimlib.IMClientFactory;
+import cn.stormbirds.stimlib.api.IMClientInterface;
 import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 
 
@@ -21,44 +24,42 @@ import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
   * @ Description：    应用层的imsClient客户端启动器
   *
   */
-public class IMSClientBootstrap {
+public class IMClientBootstrap {
 
-    private static final IMSClientBootstrap INSTANCE = new IMSClientBootstrap();
-    private IMSClientInterface imsClient;
+    private static final String TAG = IMClientBootstrap.class.getName();
+
+    private static final IMClientBootstrap INSTANCE = new IMClientBootstrap();
+    private IMClientInterface imsClient;
     private boolean isActive;
+    private static String SERVERURLLIST = "";
 
-    private IMSClientBootstrap() {
+    private IMClientBootstrap() {
 
     }
 
-    public static IMSClientBootstrap getInstance() {
+    public static IMClientBootstrap getInstance() {
         return INSTANCE;
-    }
-
-    public static void main(String[] args) {
-        String userId = "100001";
-        String token = "token_" + userId;
-        IMSClientBootstrap bootstrap = IMSClientBootstrap.getInstance();
-        String hosts = "[{\"host\":\"192.168.50.60\", \"port\":8855}]";
-        bootstrap.init(userId, token, hosts, 0);
     }
 
     public synchronized void init(String userId, String token, String hosts, int appStatus) {
         if (!isActive()) {
             Vector<String> serverUrlList = convertHosts(hosts);
             if (serverUrlList == null || serverUrlList.size() == 0) {
-                System.out.println("init IMLibClientBootstrap error,ims hosts is null");
+                Log.i(TAG, "初始化启动器错误 IMClientBootstrap，服务器地址不能为null");
                 return;
             }
 
+            SERVERURLLIST=hosts;
+
             isActive = true;
-            System.out.println("init IMLibClientBootstrap, servers=" + hosts);
+            Log.i(TAG, "初始化启动器 IMClientBootstrap 成功, servers=" + hosts);
             if (null != imsClient) {
                 imsClient.close();
             }
-            imsClient = IMSClientFactory.getIMSClient();
+            imsClient = IMClientFactory.getIMSClient();
             updateAppStatus(appStatus);
-            imsClient.init(serverUrlList, new IMSEventListener(userId, token), new IMSConnectStatusListener());
+            imsClient.login(userId,token);
+            imsClient.init(serverUrlList, new IMEventListener(userId,token), new IMConnectStatusListener());
         }
     }
 
@@ -100,5 +101,12 @@ public class IMSClientBootstrap {
         }
 
         imsClient.setAppStatus(appStatus);
+    }
+
+    public void login(String userId, String token){
+        if(imsClient!=null){
+            imsClient.login(userId,token);
+        }else
+        init(userId,token,SERVERURLLIST,0);
     }
 }

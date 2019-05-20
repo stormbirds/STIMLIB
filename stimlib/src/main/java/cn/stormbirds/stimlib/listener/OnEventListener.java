@@ -14,6 +14,8 @@ import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
  */
 public interface OnEventListener {
 
+    void login(String userId,String token);
+
     /**
      * 分发消息到应用层
      *

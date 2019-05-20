@@ -1,11 +1,13 @@
 package cn.stormbirds.stimlib.netty;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.UUID;
 
 
-import cn.stormbirds.stimlib.IMSConfig;
+import cn.stormbirds.stimlib.IMConfig;
 import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,6 +16,7 @@ import io.netty.util.internal.StringUtil;
 
 public class TCPReadHandler extends ChannelInboundHandlerAdapter {
 
+    private static final String TAG = TCPReadHandler.class.getName();
     private NettyTcpClient imsClient;
 
     public TCPReadHandler(NettyTcpClient imsClient) {
@@ -25,11 +28,13 @@ public class TCPReadHandler extends ChannelInboundHandlerAdapter {
         super.channelInactive(ctx);
         System.err.println("TCPReadHandler channelInactive()");
         Channel channel = ctx.channel();
+
         if (channel != null) {
             channel.close();
             ctx.close();
         }
 
+        Log.e(TAG, "channelInactive: 触发重连");
         // 触发重连
         imsClient.resetConnect(false);
     }
@@ -46,6 +51,7 @@ public class TCPReadHandler extends ChannelInboundHandlerAdapter {
             ctx.close();
         }
 
+        Log.e(TAG, "exceptionCaught: 触发重连" );
         // 触发重连
         imsClient.resetConnect(false);
     }
@@ -61,7 +67,7 @@ public class TCPReadHandler extends ChannelInboundHandlerAdapter {
         if (msgType == imsClient.getServerSentReportMsgType()) {
             int statusReport = message.getHead().getStatusReport();
             System.out.println(String.format("服务端状态报告：「%d」, 1代表成功，0代表失败", statusReport));
-            if (statusReport == IMSConfig.DEFAULT_REPORT_SERVER_SEND_MSG_SUCCESSFUL) {
+            if (statusReport == IMConfig.DEFAULT_REPORT_SERVER_SEND_MSG_SUCCESSFUL) {
                 System.out.println("收到服务端消息发送状态报告，message=" + message + "，从超时管理器移除");
                 imsClient.getMsgTimeoutTimerManager().remove(message.getHead().getMsgId());
             }

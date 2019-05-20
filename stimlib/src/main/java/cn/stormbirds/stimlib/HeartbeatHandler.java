@@ -1,5 +1,7 @@
 package cn.stormbirds.stimlib;
 
+import android.util.Log;
+
 import cn.stormbirds.stimlib.netty.NettyTcpClient;
 import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,7 +10,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
 public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
-
+    private static final String TAG = HeartbeatHandler.class.getName();
     private NettyTcpClient imsClient;
     public HeartbeatHandler(NettyTcpClient imsClient) {
         this.imsClient = imsClient;
@@ -21,6 +23,7 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
             IdleState state = ((IdleStateEvent) evt).state();
             switch (state) {
                 case READER_IDLE: {
+                    Log.e(TAG, "userEventTriggered: "+"READER_IDLE");
                     // 规定时间内没收到服务端心跳包响应，进行重连操作
                     imsClient.resetConnect(false);
                     break;

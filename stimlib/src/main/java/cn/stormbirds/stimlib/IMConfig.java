@@ -1,6 +1,6 @@
 package cn.stormbirds.stimlib;
 
-public class IMSConfig {
+public class IMConfig {
 
     // 默认重连一个周期失败间隔时长
     public static final int DEFAULT_RECONNECT_INTERVAL = 3 * 1000;
