@@ -1,5 +1,7 @@
 package cn.stormbirds.stimlib;
 
+import android.util.Log;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,7 +11,7 @@ import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 import io.netty.util.internal.StringUtil;
 
 public class MsgTimeoutTimerManager {
-
+    private static final String TAG = MsgTimeoutTimerManager.class.getSimpleName();
     private Map<String, MsgTimeoutTimer> mMsgTimeoutMap = new ConcurrentHashMap<>();
     private IMClientInterface imsClient;// ims客户端
 
@@ -51,7 +53,7 @@ public class MsgTimeoutTimerManager {
             mMsgTimeoutMap.put(msgId, timer);
         }
 
-        System.out.println("添加消息超发送超时管理器，message=" + msg + "\t当前管理器消息数：" + mMsgTimeoutMap.size());
+        Log.d(TAG,"添加消息超发送超时管理器，message=" + msg + "\t当前管理器消息数：" + mMsgTimeoutMap.size());
     }
 
     /**
@@ -72,7 +74,7 @@ public class MsgTimeoutTimerManager {
             timer = null;
         }
 
-        System.out.println("从发送消息管理器移除消息，message=" + msg);
+        Log.d(TAG,"从发送消息管理器移除消息，message=" + msg);
     }
 
     /**

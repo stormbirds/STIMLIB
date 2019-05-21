@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity implements IM_EventListener,
     private TextView mTextView;
     private Button login;
 
-    String userId = "20025653445398528";
-    String token = "Bearer " + userId;
-    String hosts = "[{\"host\":\"192.168.6.198\", \"port\":8855}]";
+    String userId = "24307290526060544";
+    String token = "Bearer eyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNpkzbsKwjAYhuF7-eYEkjZ_c9hEBAex0FWk5AjpYrEtCOK9q-Dm-rzD-8SyBTg0qhW6sYKaTnSClALDtuT7WBPcX2RY4m3OcBcM_ekw7s77Yz_gypAfM5wkMsq2liRD9esPhKYvTGv9_HLQPgcfeLZFclVk4SbpyG2KRnmjyRaN1xsAAP__.jio7AhvfJ9YNt5R38HTzaMZh8ziHaRx5HrUXhJs5UCA";
+    String hosts = "[{\"host\":\"47.107.139.255\", \"port\":8855}]";
     private PermissionHelper mPermissionHelper;
     private static final String[] EVENTS = {
             Events.CHAT_SINGLE_MESSAGE,
@@ -78,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements IM_EventListener,
     }
 
     public void login(){
-        userId = UUID.randomUUID().toString();
-        token = "Bearer " + userId;
         IMClientBootstrap.getInstance().login(userId, token);
 
     }

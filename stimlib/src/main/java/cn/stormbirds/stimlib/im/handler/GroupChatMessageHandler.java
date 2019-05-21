@@ -24,7 +24,7 @@ public class GroupChatMessageHandler extends AbstractMessageHandler {
 
     @Override
     protected void action(AppMessage message) {
-        Log.d(TAG, "收到群聊消息，message=" + message);
+        Log.v(TAG, "收到群聊消息，message=" + message);
 
         GroupMessage msg = new GroupMessage();
         msg.setMsgId(message.getHead().getMsgId());

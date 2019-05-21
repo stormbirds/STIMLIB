@@ -22,7 +22,7 @@ public class IMEventCenter {
     /**
      * 事件中心服务名称
      */
-    public static final String SYMBOLIC_NAME = "EventCenter";
+    public static final String TAG = "EventCenter";
 
     /**
      * 监听器列表，支持一对多存储
@@ -190,7 +190,7 @@ public class IMEventCenter {
             LinkedList<IM_EventListener> listenerList = null;
 
             synchronized (mListenerLock) {
-                Log.d(SYMBOLIC_NAME, "dispatchEvent | topic = " + topic + " msgCode = " + event.msgCode);
+                Log.v(TAG, "dispatchEvent | topic = " + topic + " msgCode = " + event.msgCode);
                 Object obj = mListenerMap.get(topic);
                 if(null != obj) {
                     if(obj instanceof IM_EventListener) {

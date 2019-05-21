@@ -306,21 +306,4 @@ public class CThreadPoolExecutor {
         return builder;
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 10000; i++) {
-            final int index = i;
-            System.out.println("index=" + index);
-            CThreadPoolExecutor.runInBackground(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println("正在运行第[" + (index + 1) + "]个线程.");
-                }
-            });
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

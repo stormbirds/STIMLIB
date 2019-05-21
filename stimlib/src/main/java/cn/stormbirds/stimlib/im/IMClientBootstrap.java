@@ -26,7 +26,7 @@ import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
   */
 public class IMClientBootstrap {
 
-    private static final String TAG = IMClientBootstrap.class.getName();
+    private static final String TAG = IMClientBootstrap.class.getSimpleName();
 
     private static final IMClientBootstrap INSTANCE = new IMClientBootstrap();
     private IMClientInterface imsClient;
@@ -45,7 +45,7 @@ public class IMClientBootstrap {
         if (!isActive()) {
             Vector<String> serverUrlList = convertHosts(hosts);
             if (serverUrlList == null || serverUrlList.size() == 0) {
-                Log.i(TAG, "初始化启动器错误 IMClientBootstrap，服务器地址不能为null");
+                Log.e(TAG, "初始化启动器错误 IMClientBootstrap，服务器地址不能为null");
                 return;
             }
 

@@ -16,7 +16,7 @@ import io.netty.util.internal.StringUtil;
 
 public class TCPReadHandler extends ChannelInboundHandlerAdapter {
 
-    private static final String TAG = TCPReadHandler.class.getName();
+    private static final String TAG = TCPReadHandler.class.getSimpleName();
     private NettyTcpClient imsClient;
 
     public TCPReadHandler(NettyTcpClient imsClient) {
@@ -26,15 +26,13 @@ public class TCPReadHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
-        System.err.println("TCPReadHandler channelInactive()");
+        Log.e(TAG,"TCPReadHandler channelInactive()");
         Channel channel = ctx.channel();
 
         if (channel != null) {
             channel.close();
             ctx.close();
         }
-
-        Log.e(TAG, "channelInactive: 触发重连");
         // 触发重连
         imsClient.resetConnect(false);
     }
@@ -44,14 +42,13 @@ public class TCPReadHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx, cause);
-        System.err.println("TCPReadHandler exceptionCaught()");
+        Log.e(TAG,"TCPReadHandler exceptionCaught()");
         Channel channel = ctx.channel();
         if (channel != null) {
             channel.close();
             ctx.close();
         }
 
-        Log.e(TAG, "exceptionCaught: 触发重连" );
         // 触发重连
         imsClient.resetConnect(false);
     }
@@ -66,15 +63,15 @@ public class TCPReadHandler extends ChannelInboundHandlerAdapter {
         int msgType = message.getHead().getMsgType();
         if (msgType == imsClient.getServerSentReportMsgType()) {
             int statusReport = message.getHead().getStatusReport();
-            System.out.println(String.format("服务端状态报告：「%d」, 1代表成功，0代表失败", statusReport));
+            Log.i(TAG,String.format("服务端状态报告：「%d」, 1代表成功，0代表失败", statusReport));
             if (statusReport == IMConfig.DEFAULT_REPORT_SERVER_SEND_MSG_SUCCESSFUL) {
-                System.out.println("收到服务端消息发送状态报告，message=" + message + "，从超时管理器移除");
+                Log.i(TAG,"收到服务端消息发送状态报告，message=" + message + "，从超时管理器移除");
                 imsClient.getMsgTimeoutTimerManager().remove(message.getHead().getMsgId());
             }
         } else {
             // 其它消息
             // 收到消息后，立马给服务端回一条消息接收状态报告
-            System.out.println("收到消息，message=" + message);
+            Log.i(TAG,"收到消息，message=" + message);
             MessageProtobuf.Msg receivedReportMsg = buildReceivedReportMsg(message.getHead().getMsgId());
             if(receivedReportMsg != null) {
                 imsClient.sendMsg(receivedReportMsg);

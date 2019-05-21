@@ -14,7 +14,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
 
 
-    private static final String TAG = LoginAuthRespHandler.class.getName();
+    private static final String TAG = LoginAuthRespHandler.class.getSimpleName();
     private NettyTcpClient imsClient;
 
     public LoginAuthRespHandler(NettyTcpClient imsClient) {
@@ -35,7 +35,7 @@ public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
 
         int handshakeMsgType = handshakeMsg.getHead().getMsgType();
         if (handshakeMsgType == handshakeRespMsg.getHead().getMsgType()) {
-            System.out.println("收到服务端握手响应消息，message=" + handshakeRespMsg);
+            Log.v(TAG,"收到服务端握手响应消息，message=" + handshakeRespMsg);
             int status = -1;
             try {
                 JSONObject jsonObj = JSON.parseObject(handshakeRespMsg.getHead().getExtend());
@@ -53,13 +53,13 @@ public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
                     // 握手成功，检查消息发送超时管理器里是否有发送超时的消息，如果有，则全部重发
                     imsClient.getMsgTimeoutTimerManager().onResetConnected();
 
-                    System.out.println("发送心跳消息：" + heartbeatMsg + "当前心跳间隔为：" + imsClient.getHeartbeatInterval() + "ms\n");
+                    Log.v(TAG,"发送心跳消息：" + heartbeatMsg + "当前心跳间隔为：" + imsClient.getHeartbeatInterval() + "ms\n");
                     imsClient.sendMsg(heartbeatMsg);
 
                     // 添加心跳消息管理handler
                     imsClient.addHeartbeatHandler();
                 } else {
-                    Log.e(TAG, "channelRead: 握手失败，触发重连" );
+                    Log.d(TAG, "channelRead: 握手失败，触发重连" );
                     imsClient.resetConnect(false);// 握手失败，触发重连
                 }
             }

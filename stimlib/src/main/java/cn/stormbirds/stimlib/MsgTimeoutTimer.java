@@ -1,5 +1,7 @@
 package cn.stormbirds.stimlib;
 
+import android.util.Log;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -7,6 +9,8 @@ import cn.stormbirds.stimlib.api.IMClientInterface;
 import cn.stormbirds.stimlib.protobuf.MessageProtobuf;
 
 public class MsgTimeoutTimer extends Timer {
+
+    private static final String TAG = MsgTimeoutTask.class.getSimpleName();
 
     private IMClientInterface imsClient;// ims客户端
     private MessageProtobuf.Msg msg;// 发送的消息
@@ -64,7 +68,7 @@ public class MsgTimeoutTimer extends Timer {
     }
 
     public void sendMsg() {
-        System.out.println("正在重发消息，message=" + msg);
+        Log.i(TAG,"正在重发消息，message=" + msg);
         imsClient.sendMsg(msg, false);
     }
 

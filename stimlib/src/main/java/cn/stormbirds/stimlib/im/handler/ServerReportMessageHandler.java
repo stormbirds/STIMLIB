@@ -20,6 +20,6 @@ public class ServerReportMessageHandler extends AbstractMessageHandler {
 
     @Override
     protected void action(AppMessage message) {
-        Log.d(TAG, "收到消息状态报告，message=" + message);
+        Log.v(TAG, "收到消息状态报告，message=" + message);
     }
 }

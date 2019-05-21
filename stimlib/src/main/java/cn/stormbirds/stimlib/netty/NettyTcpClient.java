@@ -25,7 +25,7 @@ import io.netty.util.internal.StringUtil;
 
 public class NettyTcpClient implements IMClientInterface {
 
-    private static final String TAG = NettyTcpClient.class.getName();
+    private static final String TAG = NettyTcpClient.class.getSimpleName();
     private static volatile NettyTcpClient instance;
 
     private Bootstrap bootstrap;
@@ -251,7 +251,7 @@ public class NettyTcpClient implements IMClientInterface {
     @Override
     public void sendMsg(MessageProtobuf.Msg msg, boolean isJoinTimeoutManager) {
         if (msg == null || msg.getHead() == null) {
-            Log.d(TAG, "sendMsg: 发送消息失败，消息为空\tmessage=" + msg);
+            Log.e(TAG, "sendMsg: 发送消息失败，消息为空\tmessage=" + msg);
             return;
         }
 
@@ -262,7 +262,7 @@ public class NettyTcpClient implements IMClientInterface {
         }
 
         if (channel == null) {
-            Log.d(TAG, "sendMsg: 发送消息失败，channel为空\tmessage="+ msg);
+            Log.e(TAG, "sendMsg: 发送消息失败，channel为空\tmessage="+ msg);
         }
 
         try {
@@ -517,14 +517,14 @@ public class NettyTcpClient implements IMClientInterface {
             }
 
             case IMConfig.CONNECT_STATE_FAILURE:{
-                Log.d(TAG, "onConnectStatusCallback: "+(String.format("ims连接失败 connectStatus %s isClosed %s isReconnecting %s" ,this.connectStatus,this.isClosed,this.isReconnecting)));
+                Log.e(TAG, "onConnectStatusCallback: "+(String.format("ims连接失败 connectStatus %s isClosed %s isReconnecting %s" ,this.connectStatus,this.isClosed,this.isReconnecting)));
                 if (mIMSConnectStatusCallback != null) {
                     mIMSConnectStatusCallback.onConnectFailed();
                 }
                 break;
             }
             default: {
-                Log.i(TAG, "onConnectStatusCallback: "+ connectStatus);
+                Log.e(TAG, "onConnectStatusCallback: 收到未定义状态 "+ connectStatus);
 
                 break;
             }

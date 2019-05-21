@@ -29,7 +29,7 @@ public class BaseApplication extends STIMApp {
         super.onCreate();
         String userId = UUID.randomUUID().toString();
         String token = "Bearer " + userId;
-        String hosts = "[{\"host\":\"192.168.6.198\", \"port\":8855}]";
+        String hosts = "[{\"host\":\"47.107.139.255\", \"port\":8855}]";
         IMClientBootstrap.getInstance().init(userId, token, hosts, 0);
     }
 }

@@ -10,7 +10,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
 public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
-    private static final String TAG = HeartbeatHandler.class.getName();
+    private static final String TAG = HeartbeatHandler.class.getSimpleName();
     private NettyTcpClient imsClient;
     public HeartbeatHandler(NettyTcpClient imsClient) {
         this.imsClient = imsClient;
@@ -23,7 +23,7 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
             IdleState state = ((IdleStateEvent) evt).state();
             switch (state) {
                 case READER_IDLE: {
-                    Log.e(TAG, "userEventTriggered: "+"READER_IDLE");
+                    Log.d(TAG, "userEventTriggered: "+"READER_IDLE");
                     // 规定时间内没收到服务端心跳包响应，进行重连操作
                     imsClient.resetConnect(false);
                     break;
@@ -58,7 +58,7 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
                 if (heartbeatMsg == null) {
                     return;
                 }
-                System.out.println("发送心跳消息，message=" + heartbeatMsg + "当前心跳间隔为：" + imsClient.getHeartbeatInterval() + "ms\n");
+                Log.v(TAG, "发送心跳消息，message=" + heartbeatMsg + "当前心跳间隔为：" + imsClient.getHeartbeatInterval() + "ms\n");
                 imsClient.sendMsg(heartbeatMsg, false);
             }
         }
