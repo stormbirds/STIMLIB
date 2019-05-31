@@ -17,7 +17,7 @@ allprojects {
 2. Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.stormbirds:stimlib:v0.0.1'
+	        implementation 'com.github.stormbirds:stimlib:v0.1.1'
 }
 ```
      Maven
